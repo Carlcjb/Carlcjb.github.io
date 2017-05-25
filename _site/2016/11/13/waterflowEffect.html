@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>网页瀑布流效果实现的几种方式 | Dailc的个人主页</title>
+    <meta name="author" content="dailc" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="Everything about dailc" />
+    <meta name="baidu-site-verification" content="cVrw8PsZv7" />
+    <meta name="keywords" content="dailc,戴荔春,戴荔春的博客,dailc的博客" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  	<link href="/asserts/css/default.css" rel="stylesheet" type="text/css" media="all">
+	<script type="text/javascript" src="/asserts/js/app.js" ></script> 
+</head>
+<body>
+	<!--头部 -->
+	<header class="header">
+		<div class="header-container">
+			<section class="site-logo">
+				<a  href="/">撒网要见鱼</a>
+			</section>
+			<button class="collapsed " type="button" >
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		    </button>
+		    <div class="menu-container">
+				<nav class="site-nav">
+					<ul>
+						<li>
+							<a  href="/blog/archiveAll.html">随笔</a>
+						</li>
+						<li>
+							<a  href="/blog/archive.html">博客</a>
+						</li>
+						<li>
+							<a  href="/blog/categories.html">分类</a>
+						</li>
+						<li>
+							<a  href="/blog/tags.html">标签</a>
+						</li>
+						<li>
+							<a  href="/demo/demo.html">Demo</a>
+						</li>
+						<li>
+							<a  href="/favour/music.html">音乐</a>
+						</li>
+						<li>
+							<a  href="/favour/book.html">Book</a>
+						</li>
+						<li>
+							<a  href="/about/timeline.html">时间轴</a>
+						</li>
+						<li>
+							<a  href="/others/collection.html">收藏</a>
+						</li>
+						<li>
+							<a  href="/about/about.html">关于</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="site-search">
+					<input type="text" />
+				</div>
+			</div>
+		</div>
+	</header>
+	<link href="/asserts/css/blog_article_post.css" rel="stylesheet" type="text/css" media="all">
+<link href="/asserts/css/blog_personCard_style.css" rel="stylesheet" type="text/css" media="all">
+<link href="/asserts/css/imageBubble.css" rel="stylesheet" type="text/css" media="all">
+	
+	<div class="wrap">
+		<div class="container">
+			<!-- 左侧，内容，多说评论等-->
+			<div class="col-md-9">
+				<!-- 内容-->
+				<div class="markdown-body">
+					<!--标题区域 -->
+					<div class="title-container">
+					<h1 class="page-title"><a  title="网页瀑布流效果实现的几种方式">网页瀑布流效果实现的几种方式</a> </h1>
+						<!-- metainfo-->
+						<section class="meta clearfix">
+<span class="time">
+<time datetime="2016-11-13">2016-11-13</time>
+</span>
+
+| 
+<span class="categories">
+	分类
+	    
+	    <a href="/blog/categories.html#blog" title="blog">blog</a>&nbsp;
+	    
+</span>
+
+
+| 
+<span class="tags">
+	标签
+		
+		<a href="/blog/tags.html#瀑布流" title="瀑布流">瀑布流</a>&nbsp;
+		
+		<a href="/blog/tags.html#javascript" title="javascript">javascript</a>&nbsp;
+		
+		<a href="/blog/tags.html#css" title="css">css</a>&nbsp;
+		
+		<a href="/blog/tags.html#效果展示" title="效果展示">效果展示</a>&nbsp;
+		
+</span>
+
+| 
+<span class="views">
+	浏览
+	<a id="busuanzi_value_page_pv"></a>&nbsp;
+</span>
+</section>
+						<section class="right-tips">
+							<span >
+								瀑布流
+							</span>
+						</section>
+					</div>
+					<!-- 特别推荐-->
+					
+					<!-- 内容区域-->
+					<div class="content-container">
+						 <h2 id="前言">前言</h2>
+
+<blockquote>
+  <p>like a mountain that is in our path,wo cannot complain that it is there,we simply have to climb it</p>
+</blockquote>
+
+<h2 id="起由">起由</h2>
+<p>最近,在搭建个人博客时，其中的Demo展示页面想用瀑布流形式展现，发现现有的js插件大多基于JQ的，而我稍微有点小强迫，不想基于JQ，于是就着手自己封装了一个。顺带就研究了下css3方式实现瀑布流，于是总结了下，写了几个示例demo，就有了本文。</p>
+
+<h2 id="几种常用的瀑布流介绍">几种常用的瀑布流介绍</h2>
+<p>一般瀑布流的实现常见有三种方式</p>
+
+<ul>
+  <li>传统的多列浮动</li>
+  <li>css3样式定义</li>
+  <li>js计算绝对布局</li>
+</ul>
+
+<h3 id="传统的多列浮动简介">传统的多列浮动简介</h3>
+<p>首先固定屏幕中展示的列数，每一列中间的数据作为一组单独计算，插入数据时分别插入不同列中
+优点:</p>
+
+<ul>
+  <li>布局最为简单,一般只依赖与一个浮动布局</li>
+  <li>不需要知道内容的高度，所以当有图片未加载时也不影响</li>
+</ul>
+
+<p>缺点:</p>
+
+<ul>
+  <li>只适用于特定的屏幕，当屏幕size变化时，无法动态实现列数的更改</li>
+  <li>拓展不易</li>
+</ul>
+
+<h3 id="css3样式定义瀑布流简介">css3样式定义瀑布流简介</h3>
+<p>利用css3中特有属性，在高级浏览器中实现瀑布流效果
+优点:</p>
+
+<ul>
+  <li>直接使用css样式，最为简洁，不依赖于任何js</li>
+  <li>拓展方便，直接往容器内部添加内容即可</li>
+  <li>自适应，屏幕变化，布局也会变化</li>
+  <li>当各个item的宽度不一致时，这种方式也适用</li>
+  <li>像一些特殊的如固定的两列瀑布流也可以很方便实现(固定显示两列，每一列可以横着有多个item)</li>
+</ul>
+
+<p>缺点:</p>
+
+<ul>
+  <li>需要高级浏览器支持(其实这个现在已经不算缺点了)</li>
+  <li>这种方式和普通瀑布流的原理有区别，不是分别往不同列中插入数据，而是先往一列中插入数据，达到一定高度后再往其它列中插入数据，有时候用这种方式会达不到预期效果(这个是比较关键的，这种方式有时候体验达不到预期)</li>
+</ul>
+
+<h3 id="js计算绝对布局实现瀑布流简介">js计算绝对布局实现瀑布流简介</h3>
+<p>利用js，动态计算元素的插入位置，利用绝对布局absolute进行定位，根据屏幕的不同可以动态调整
+优点:</p>
+
+<ul>
+  <li>便于拓展，方便数据的添加</li>
+  <li>自适应，屏幕变化，布局也会变化</li>
+</ul>
+
+<p>缺点:</p>
+
+<ul>
+  <li>计算时需要知道内容高度，如果包含图片，需要等图片加载完毕再计算，否则会存在误差</li>
+  <li>各个item的宽度需要一致</li>
+</ul>
+
+<p><strong>就实用性而言，传统的瀑布流比较适合业务场景较为单一的情况，比如手机中固定两列的情况，css3瀑布流布局由于有时候会造成一些不理想的局面，所以更多的被用在了面试题等上面，最后那张绝对布局的瀑布流方式是被应用的最为广泛的</strong></p>
+
+<p>本文主要探讨css3瀑布流和绝对定位瀑布流的实现</p>
+
+<h2 id="css3瀑布流的实现">css3瀑布流的实现</h2>
+<p>这种实现方式是最为简单的，仅仅是基于css3的新属性(column-width或column-count)，</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>css3中增加了一个新的属性：column，来实现等高的列的布局效果。该属性有column-width宽度，column-count数量等，并且能根据窗口自适应。
+</code></pre>
+</div>
+
+<p>css实现瀑布流分为两种效果，<strong>普通横向瀑布流</strong>与<strong>固定列数的瀑布流</strong></p>
+
+<h3 id="普通横向瀑布流">普通横向瀑布流</h3>
+<p>这种瀑布流方式常常用于和js绝对布局方式比较，但是虽然从显示上来说，效果差不多，但是从用户体验的角度讲，这个不符合平常的习惯，以下是两种方式的效果图对比
+<img src="https://dailc.github.io/showDemo/staticresource/waterfallflow/demo_js_waterfallflow_2.png" alt="" /></p>
+
+<h4 id="实现代码">实现代码</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>.container{
+		/*宽*/
+        -webkit-column-width:200px;
+        -moz-column-width:200px;
+        -o-colum-width:200px;
+        /*间距*/
+        -webkit-column-gap:1px;
+        -moz-column-gap:1px;
+        -o-column-gap:1px;
+    }
+</code></pre>
+</div>
+
+<h3 id="固定列数的瀑布流">固定列数的瀑布流</h3>
+<p>这种布局用到比较少，但是某些面试题会经常提到，效果如下
+<img src="https://dailc.github.io/showDemo/staticresource/waterfallflow/demo_js_waterfallflow_4.png" alt="" /></p>
+
+<h4 id="实现代码-1">实现代码</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>.container{
+        /*固定列*/
+        /*-moz-column-count:2; 
+		-webkit-column-count:2; 
+		column-count:2;*/
+        /*间距*/
+        -webkit-column-gap:1px;
+        -moz-column-gap:1px;
+        -o-column-gap:1px;
+    }
+</code></pre>
+</div>
+
+<h3 id="示例与源码">示例与源码</h3>
+<p>想看示例页面可以戳一戳 
+<a href="https://dailc.github.io/showDemo/waterfallflow/demo_waterfall_flow_css3.html">css3瀑布流效果</a>
+源码可以查看
+<a href="https://github.com/dailc/showDemo/blob/master/waterfallflow/demo_waterfall_flow_css3.html">https://github.com/dailc/showDemo/blob/master/waterfallflow/demo_waterfall_flow_css3.html</a></p>
+
+<h2 id="js绝对布局瀑布流实现">js绝对布局瀑布流实现</h2>
+<p>这种实现方式是最为经典的，也是运营的最多的，网上也有很多的原生或jq插件，本文这里也用原生js重新封装了一个类库，方便调用，效果如图
+<img src="https://dailc.github.io/showDemo/staticresource/waterfallflow/demo_js_waterfallflow_1.png" alt="" /></p>
+
+<h3 id="实现思路">实现思路</h3>
+<p>瀑布流的实现思路其实很简单，如下:</p>
+
+<ol>
+  <li>获取元素容器的总宽度allWith, 每一个瀑布流元素的列宽度 itemWidth(如果大于allwidth,会有一个默认值替代)</li>
+  <li>计算当前容器可以显示的列数 column  Math.floor(allwidth/itemWidth) 向下取整</li>
+  <li>添加一个元素前，计算每一列当前的高度，寻找当前高度最小的列，然后根据列的序号k，确定item的left和top，lef=k*itemWidth top=当前列的高度，然后当前列插入这个元素，当前列的高度加上这个元素的高度</li>
+  <li>所有元素插入完毕后，容器的高度会调整为最大列的高度</li>
+  <li>初始化就是先读取页面的所有元素，然后一个一个插入，加载更多就是在已有的元素基础上，插入新的元素计算</li>
+</ol>
+
+<h3 id="实现代码-2">实现代码</h3>
+<p>由于代码较为占用篇幅，这里就不再赘述，基本根据实现思路都能实现出来，也可以查看下面提供的源码链接</p>
+
+<h3 id="示例与源码-1">示例与源码</h3>
+<p>想看示例页面可以戳一戳 
+<a href="https://dailc.github.io/showDemo/waterfallflow/demo_waterfall_flow_js.html">js瀑布流效果</a></p>
+
+<p>源码可以查看
+<a href="https://github.com/dailc/showDemo/blob/master/waterfallflow/demo_waterfall_flow_js.html">https://github.com/dailc/showDemo/blob/master/waterfallflow/demo_waterfall_flow_js.html</a></p>
+
+<h2 id="原文地址">原文地址</h2>
+<p>原文在我个人博客上面</p>
+
+<p><a href="https://dailc.github.io/2016/11/13/waterflowEffect.html">网页瀑布流效果实现的几种方式</a></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="http://www.cnblogs.com/slowsoul/archive/2013/02/10/2909746.html">[瀑布流布局——JS+绝对定位](http://www.cnblogs.com/slowsoul/archive/2013/02/10/2909746.html)</a></li>
+  <li><a href="http://xhay1122.com/2015/06/30/2015-06-30-pinterest/">基于css3 column-width 实现的瀑布流</a></li>
+</ul>
+
+					</div>
+					<!-- 上一篇与下一篇-->
+					<section align="right" class="post-next-prev">
+					  <span>
+					    <a  href="/2016/11/06/bookReview_dracula.html" class="active"  >上一篇</a>
+					    &nbsp;&nbsp;&nbsp;
+					    <a  href="/2016/11/13/bookReview_theSorrowsOfYoungWeather.html" class="active"  >下一篇</a>
+					  </span>
+					</section>
+				</div>
+				<!-- 多说-->
+				
+<!--多说评论 -->
+<div id="duoshuo-container">
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="http://localhost:4000/2016/11/13/waterflowEffect.html}" data-title="网页瀑布流效果实现的几种方式" data-url="http://localhost:4000/2016/11/13/waterflowEffect.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"dailc"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+				
+				
+			</div>
+			
+			<!-- 右侧包括个人介绍，TOC菜单-->
+			<div class="col-md-3">
+				<!-- 右侧人物面板-->
+				<div class="effect1 person-card">
+					
+				 	<a  class="member-image">
+				 			<img src="/asserts/images/img_avatar.jpg" alt="Lichun Dai"/>
+				 	</a>
+				 	<div class="member-info">
+				 		<p class="info-name">
+				 		<a >
+				 			Lichun Dai
+				 		</a>
+				 		</p>
+				 		<p>
+				 			单线程生物，无法同时专注于多件事情。做自己感兴趣的工作，目前偏爱前端。业余爱好:口琴、吉他。
+				 		</p>
+				 	<p class="info-foot">
+				 		<a class="left-card left" href="/blog/archive.html">
+				 			<em>
+				 				博客
+				 			</em>
+				 			<strong>
+				 				28
+				 				
+				 			</strong>
+				 		</a>
+				 		<a class="middle-card left" href="/demo/demo.html">
+				 			<em>
+				 				项目
+				 			</em>
+				 			<strong>
+				 				2
+				 			</strong>
+				 		</a>
+				 		<a class="right-card left" href="/blog/archiveAll.html">
+				 			<em>
+				 				随笔
+				 			</em>
+				 			<strong>
+				 				58
+				 			</strong>
+				 		</a>
+				 	</p>
+				 	<p class="info-social-touch">
+				 		<a target="_blank" href="https://github.com/dailc" ><img src="/asserts/images/icons/favicon_github.ico" alt="GitHub"/> </a>
+						<a target="_blank" href="http://5sing.kugou.com/54188866/default.html"><img src="/asserts/images/icons/favicon_5sing.ico" alt="5sing" /> </a>	
+						<a target="_blank" href="http://changba.com/u/200945262"><img src="/asserts/images/icons/favicon_changba.ico" alt="唱吧" /> </a>
+						<a target="_blank" href="https://www.zhihu.com/people/dailichun"><img src="/asserts/images/icons/favicon_zhihu.ico" alt="知乎" /> </a>
+						<a target="_blank" href="http://www.jianshu.com/u/c104d2a4baec"><img src="/asserts/images/icons/favicon_jianshu.ico" alt="简书" /> </a>
+				 	</p>
+				 	</div>
+				</div>
+
+				 <!-- TOC动态菜单-->
+				  <div class="slideNavContainer">     
+				</div> 				
+					
+			</div> 
+ 
+		</div>
+	</div>
+		
+<script type="text/javascript" src="/asserts/js/post.js" ></script>
+<script type="text/javascript" src="/asserts/js/imageBubble.js" ></script>
+<script>
+	ImageBubble.init('.container img');
+</script>
+	
+	<!-- 脚步,包括版权声明，访问次数等-->
+	<footer class="footer">
+	    <p class="copyright">
+	    	<small>
+	            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/cn/" target="_blank" title="许可协议">©</a> 2016&nbsp;&nbsp;&nbsp;&nbsp;<a href="/about/">Lichun Dai</a>
+	        </small>
+	    </p>
+	    <p class="more-tips">
+	    	<span>Powered by Jekyll</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<span id="busuanzi_container_site_pv">总访客<span id="busuanzi_value_site_uv" class="site-uv"></span>人</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<span id="busuanzi_container_site_pv">总访问<span id="busuanzi_value_site_pv" class="site-pv"></span>次</span>
+	    </p>  
+	</footer>
+
+<script>
+//百度统计
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!--不蒜子 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+</body>
+</html>

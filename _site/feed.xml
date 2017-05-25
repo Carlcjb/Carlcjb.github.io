@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dailc的个人主页</title>
+    <description>记录个人成长的点点滴滴</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 25 May 2017 17:40:51 +0800</pubDate>
+    <lastBuildDate>Thu, 25 May 2017 17:40:51 +0800</lastBuildDate>
+    <generator>Jekyll v3.4.3</generator>
+    
+      <item>
+        <title>【字符编码系列】常用的几种字符编码(GBK，UTF-8，UTF-16)</title>
+        <description>&lt;h2 id=&quot;引言&quot;&gt;引言&lt;/h2&gt;
+&lt;blockquote&gt;
+  如果不知道是什么编码，先试试UTF-8！
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Wed, 17 May 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/05/17/severalCommonlyCharEncoding.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/17/severalCommonlyCharEncoding.html</guid>
+        
+        <category>字符编码</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>汤姆·索亚历险记</title>
+        <description>&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Thomas Sawyer&lt;/code&gt;，严格的来说应该是一个有多动症的小孩，或许就是小时候父母口中坏小孩的典型吧。
+
+</description>
+        <pubDate>Tue, 09 May 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/05/09/bookReview_theAdvenuresOfTomSawyer.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/09/bookReview_theAdvenuresOfTomSawyer.html</guid>
+        
+        <category>读后感</category>
+        
+        <category>英文读本</category>
+        
+        
+        <category>book</category>
+        
+      </item>
+    
+      <item>
+        <title>【字符编码系列】字符，字符集，字符编码解惑</title>
+        <description>&lt;h2 id=&quot;引言&quot;&gt;引言&lt;/h2&gt;
+&lt;blockquote&gt;
+  这是每一个程序员都应该无条件掌握的知识！
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Wed, 03 May 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/05/03/char_charset_charEncoding.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/03/char_charset_charEncoding.html</guid>
+        
+        <category>字符编码</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>字符编码系列(UTF8，GBK，UTF16以及应用)</title>
+        <description>&lt;h2 id=&quot;写在前面的话&quot;&gt;写在前面的话&lt;/h2&gt;
+身处软件开发行业，字符编码是最应该掌握的基础知识之一。
+
+</description>
+        <pubDate>Tue, 02 May 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/05/02/charsetSeries.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/02/charsetSeries.html</guid>
+        
+        <category>字符编码</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>密探</title>
+        <description>&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+在20世纪的伦敦的时代背景下，身为间谍的丈夫，苟且于生活而勉强的妻子，行动不便但忧思儿子的母亲，智商先天不足的弟弟，
+看上去和和睦睦的夫妻，表面上温馨无比的家庭，在一场意外爆炸事件后，一切都改变了。
+
+</description>
+        <pubDate>Mon, 01 May 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/05/01/bookReview_theSecretAgent.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/05/01/bookReview_theSecretAgent.html</guid>
+        
+        <category>读后感</category>
+        
+        <category>英文读本</category>
+        
+        
+        <category>book</category>
+        
+      </item>
+    
+      <item>
+        <title>杨柳风</title>
+        <description>&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+主角们:
+
+</description>
+        <pubDate>Thu, 20 Apr 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/04/20/bookReview_theWindInWillows.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/04/20/bookReview_theWindInWillows.html</guid>
+        
+        <category>读后感</category>
+        
+        <category>英文读本</category>
+        
+        
+        <category>book</category>
+        
+      </item>
+    
+      <item>
+        <title>歌剧魅影</title>
+        <description>&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+
+</description>
+        <pubDate>Tue, 11 Apr 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/04/11/bookReview_thePhantomOfTheOpera.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/04/11/bookReview_thePhantomOfTheOpera.html</guid>
+        
+        <category>读后感</category>
+        
+        <category>英文读本</category>
+        
+        
+        <category>book</category>
+        
+      </item>
+    
+      <item>
+        <title>H5下拉刷新,多种皮肤，便于拓展！</title>
+        <description>&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+下拉刷新几乎是移动H5端必用的插件，本人自踏入前端坑以来，第一个封装的h5插件也是下拉刷新，近来正好在整理下拉刷新相关知识，因此重新弄了一个下拉刷新库，统一了API，抽取了基类，提供了各式各样的皮肤，以及支持进行自定义皮肤的定制。
+
+</description>
+        <pubDate>Sun, 09 Apr 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/04/09/h5pulltorefresh.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/04/09/h5pulltorefresh.html</guid>
+        
+        <category>下拉刷新</category>
+        
+        <category>h5</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>简爱</title>
+        <description>&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+整本书就是&lt;code class=&quot;highlighter-rouge&quot;&gt;Jane Eyre&lt;/code&gt;的一生。
+
+</description>
+        <pubDate>Tue, 04 Apr 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/04/04/bookReview_JaneEyre.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/04/04/bookReview_JaneEyre.html</guid>
+        
+        <category>读后感</category>
+        
+        <category>英文读本</category>
+        
+        
+        <category>book</category>
+        
+      </item>
+    
+      <item>
+        <title>工作一年半，现在的我24岁。</title>
+        <description>&lt;h2 id=&quot;24岁的我&quot;&gt;24岁的我&lt;/h2&gt;
+现在的我24岁了，没有任何征兆，平平无奇，却又理所应当。
+
+</description>
+        <pubDate>Mon, 03 Apr 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2017/04/03/nowIamTwentyFour.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/04/03/nowIamTwentyFour.html</guid>
+        
+        <category>总结</category>
+        
+        <category>经验</category>
+        
+        <category>规划</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+  </channel>
+</rss>

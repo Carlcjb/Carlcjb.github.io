@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>一个H5的3D滑动组件实现(兼容2D模式) | Dailc的个人主页</title>
+    <meta name="author" content="dailc" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="Everything about dailc" />
+    <meta name="baidu-site-verification" content="cVrw8PsZv7" />
+    <meta name="keywords" content="dailc,戴荔春,戴荔春的博客,dailc的博客" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  	<link href="/asserts/css/default.css" rel="stylesheet" type="text/css" media="all">
+	<script type="text/javascript" src="/asserts/js/app.js" ></script> 
+</head>
+<body>
+	<!--头部 -->
+	<header class="header">
+		<div class="header-container">
+			<section class="site-logo">
+				<a  href="/">撒网要见鱼</a>
+			</section>
+			<button class="collapsed " type="button" >
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		    </button>
+		    <div class="menu-container">
+				<nav class="site-nav">
+					<ul>
+						<li>
+							<a  href="/blog/archiveAll.html">随笔</a>
+						</li>
+						<li>
+							<a  href="/blog/archive.html">博客</a>
+						</li>
+						<li>
+							<a  href="/blog/categories.html">分类</a>
+						</li>
+						<li>
+							<a  href="/blog/tags.html">标签</a>
+						</li>
+						<li>
+							<a  href="/demo/demo.html">Demo</a>
+						</li>
+						<li>
+							<a  href="/favour/music.html">音乐</a>
+						</li>
+						<li>
+							<a  href="/favour/book.html">Book</a>
+						</li>
+						<li>
+							<a  href="/about/timeline.html">时间轴</a>
+						</li>
+						<li>
+							<a  href="/others/collection.html">收藏</a>
+						</li>
+						<li>
+							<a  href="/about/about.html">关于</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="site-search">
+					<input type="text" />
+				</div>
+			</div>
+		</div>
+	</header>
+	<link href="/asserts/css/blog_article_post.css" rel="stylesheet" type="text/css" media="all">
+<link href="/asserts/css/blog_personCard_style.css" rel="stylesheet" type="text/css" media="all">
+<link href="/asserts/css/imageBubble.css" rel="stylesheet" type="text/css" media="all">
+	
+	<div class="wrap">
+		<div class="container">
+			<!-- 左侧，内容，多说评论等-->
+			<div class="col-md-9">
+				<!-- 内容-->
+				<div class="markdown-body">
+					<!--标题区域 -->
+					<div class="title-container">
+					<h1 class="page-title"><a  title="一个H5的3D滑动组件实现(兼容2D模式)">一个H5的3D滑动组件实现(兼容2D模式)</a> </h1>
+						<!-- metainfo-->
+						<section class="meta clearfix">
+<span class="time">
+<time datetime="2016-12-13">2016-12-13</time>
+</span>
+
+| 
+<span class="categories">
+	分类
+	    
+	    <a href="/blog/categories.html#blog" title="blog">blog</a>&nbsp;
+	    
+</span>
+
+
+| 
+<span class="tags">
+	标签
+		
+		<a href="/blog/tags.html#3d滑动" title="3d滑动">3d滑动</a>&nbsp;
+		
+		<a href="/blog/tags.html#javascript" title="javascript">javascript</a>&nbsp;
+		
+		<a href="/blog/tags.html#css3d" title="css3d">css3d</a>&nbsp;
+		
+		<a href="/blog/tags.html#旋转木马" title="旋转木马">旋转木马</a>&nbsp;
+		
+		<a href="/blog/tags.html#图片轮播" title="图片轮播">图片轮播</a>&nbsp;
+		
+</span>
+
+| 
+<span class="views">
+	浏览
+	<a id="busuanzi_value_page_pv"></a>&nbsp;
+</span>
+</section>
+						<section class="right-tips">
+							<span >
+								3d滑动
+							</span>
+						</section>
+					</div>
+					<!-- 特别推荐-->
+					
+					<!-- 内容区域-->
+					<div class="content-container">
+						 <h2 id="起由">起由</h2>
+<p>原始需求来源于一个项目的某个功能，要求实现3D图片轮播效果，而已有的组件大多是普通的2D图片轮播，于是重新造了一个轮子，实现了一个既支持2D，又支持3D的滑动、轮播组件。</p>
+
+<h2 id="实现思路">实现思路</h2>
+<p>刚一开始肯定是无法直接实现3D滑动组件的，所以将功能拆分，如下步骤</p>
+
+<ul>
+  <li>实现一个双向循环链表，作为底层Item的数据结构</li>
+  <li>基于链表，实现一个无限循环的2D滑动组件</li>
+  <li>基于2D滑动组件做3D变化得到3D组件</li>
+  <li>兼容性检查以及功能封装，简化使用，确保稳定</li>
+</ul>
+
+<h2 id="双向循环链表的模拟">双向循环链表的模拟</h2>
+<p>以前看到的轮播组件大多是用数组来作为底层数据结构，最近，整合受简书上的某一篇文章启发，觉得链表方式挺不错的，于是先动手造一个JS模拟的链表(<em>一些现有的资源大多不符合预期，于是重新造轮</em>)</p>
+
+<h3 id="原理">原理</h3>
+<p>双向循环链表原理比较简单，这里不再赘述</p>
+
+<h3 id="实现">实现</h3>
+<p>实现了一个双向链表，支持循环和非循环，参考 <a href="https://github.com/dailc/jsDataStruct">https://github.com/dailc/jsDataStruct</a></p>
+
+<h2 id="2d滑动组件的实现">2D滑动组件的实现</h2>
+<p>在H5时代，2D滑动组件大多是通过<strong>translate3d</strong> 和<strong>transition</strong>实现的，采用X轴位移来实现滑动，所以虽说最终的效果只是2D得平面滑动，其实也是基于3D变换的。</p>
+
+<h3 id="实现原理描述">实现原理描述</h3>
+<p>假设屏幕宽为W，滑动组件中有(A，B，C，D，E )5个item，每一个item的宽度都占满屏幕。采用循环模式(也就是E往右滑动可以到A)</p>
+
+<ol>
+  <li>构建双向循环链表，其中从A开始</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>A._next = B;
+B._next = C;
+...
+E._next = A;
+A._prev = E;
+B._prev = A;
+...
+E._prev = D;
+</code></pre>
+</div>
+<p>如上，所以所有元素首尾相连，构成循环</p>
+
+<ol>
+  <li>
+    <p>初始化组件时，各自的位置如下(只考虑X轴(→)，Y(↓)和Z(垂直屏幕)都是0)。
+E(-2W)，D(-W)，A(0)，B(W)，C(2W)。
+一般只会允许同时显示最多5个元素，其它位置的元素暂时隐藏</p>
+  </li>
+  <li>
+    <p>通过监听滑动组件的touch，来判断当前组件应该的X轴唯一translateX</p>
+  </li>
+  <li>
+    <p>touchmove过程中,显示的元素进行相应的translateX位移(向左滑为负，向右滑为正)。比如A的位置为(0+translateX)，其它元素类似</p>
+  </li>
+  <li>
+    <p>touchend时，判断当前的translateX，如果大于item宽度的50%，则判断移到下一个位置，如果大于item宽度的150%，则移到下下个元素。同理，如果小于-50%，则移到到上各元素，小于-150%，则移动到上上个元素</p>
+  </li>
+  <li>
+    <p>移动到上一个元素，各自item的translateX 减去W即可，移动到下一个元素，加上W。并且移动过程中设置 <code class="highlighter-rouge">transition(cubic-bezier(0.165, 0.84, 0.44, 1))</code></p>
+  </li>
+  <li>
+    <p>由于是通过双向循环链表构建，所以每次移动只需要通过_next就可找到下一个元素，通过_prev即可找到上一个元素，并且自动循环</p>
+  </li>
+</ol>
+
+<h3 id="原理流程">原理流程</h3>
+<p>以下为上述中向右滑动一位，的过程图述
+<img src="https://dailc.github.io/showDemo/staticresource/carrousel/demo_js_carrousel_3.png" alt="" /></p>
+
+<h3 id="效果预览">效果预览</h3>
+<p>下图是将item的宽度设为屏幕50%后的2D滑动效果
+<img src="https://dailc.github.io/showDemo/staticresource/carrousel/demo_js_carrousel_1.png" alt="" /></p>
+
+<h2 id="3d滑动组件的进一步实现">3D滑动组件的进一步实现</h2>
+<p>上述过程中实现了2D滑动组件，那么带3D组件的组件该如何实现呢？毕竟最初的需求就是3D效果。</p>
+
+<p>其实上述2D滑动组件就已经用到了3D变化了，只不过我们只用了X轴变换。所以看起来仍然是2D效果，所以接下来我们就是需要利用到另外两个轴的变换。</p>
+
+<h3 id="最终效果图示">最终效果图示</h3>
+<p>最终我们需要实现如图所示的3D滑动效果
+<img src="https://dailc.github.io/showDemo/staticresource/carrousel/demo_js_carrousel_2.png" alt="" /></p>
+
+<h3 id="基本3d坐标轴">基本3D坐标轴</h3>
+<p>我们将屏幕左上角看成原点。那么</p>
+
+<ul>
+  <li>X轴就是平行于屏幕的水平方向，从左到右</li>
+  <li>Y轴就是平行于屏幕的垂直方向，从上到下</li>
+  <li>Z轴就是垂直于屏幕(垂直于这个面)，由内向外(也就是从屏幕后面穿过屏幕，指向做电脑前面的人)</li>
+</ul>
+
+<h3 id="分析我们需要的3d变换">分析我们需要的3D变换</h3>
+<p>对比已经完成的2D效果和最终3D效果的图，我们发现有以下区别</p>
+
+<ul>
+  <li>Y轴存在旋转(rotateY)，目测，左侧第一个Item的旋转角度在(30度和45度之间)</li>
+  <li>Z轴存在纵深(translateZ或translate3d)，可以观察出，屏幕中心的Item和左侧或右侧的纵深不一样，屏幕中心的Z值更大(更突出)</li>
+  <li>需要找一个合适的视点(perspective)，因为存在Z轴纵深，所以肯定是需要找到一个合适的视点来观察整个组件的。</li>
+</ul>
+
+<h3 id="实际实现">实际实现</h3>
+<p>实际实现过程中，和上述分析的过程一致，在2D变换的基础上，针对Y轴进行了旋转计算，针对Z轴进行了纵深计算。</p>
+
+<p>基本过程是:</p>
+
+<ol>
+  <li>
+    <p>找到一个合适的Y轴旋转计算公式(比如那左侧的Item调试，找到一个合适的点)</p>
+  </li>
+  <li>
+    <p>找到合适的适应于不同屏幕分辨率的Z轴纵深以及视点位置，(比如在屏幕320时，找到一个合适的Z轴纵深和perspective，然后再屏幕768时再找到一个，进行线性插值即可)</p>
+  </li>
+</ol>
+
+<p>详细过程不再赘述</p>
+
+<h3 id="兼容性检查以及功能封装">兼容性检查以及功能封装</h3>
+<p>初步做出来的效果并不能很好的兼容各种分辨率屏幕以及功能较为简陋。</p>
+
+<p>所以接下来的主要工作是:</p>
+
+<ul>
+  <li>找到合适的插值公式，使的3D变化适应于较多的屏幕。</li>
+  <li>检查代码，使的兼容更多的浏览器版本(比如Chrome，APP内嵌Webview，FireFox等等，当然了，肯定不考虑IE)</li>
+  <li>代码封装抽象工作，合理开放API，以及便于后续拓展(剥离第三方库的依赖，进一步封装后，使的类库代码更优雅)</li>
+</ul>
+
+<p>基本上述工作完成后，一个崭新的3D滑动组件类库就完成了，它主要有如下功能；</p>
+
+<ol>
+  <li>支持3D滑动效果(核心功能)</li>
+  <li>兼容2D滑动效果(同时保证普通的使用)</li>
+  <li>开放以下API</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> * reset 重置,这个可以重写更换options
+ * prev 上一个item
+ * next 下一个item
+ * moveTo 移动到某一个指定item,会寻找最短路径
+ * bindItemChangedHandler 绑定item切换的监听回调
+ * bindItemTapHandler 绑定item的tap监听
+ * unBindItemTapHandler 解绑item的tap监听，会取消所有的item的tap事件以及item内部的tap
+ * tap 绑定item内部某元素的tap事件，因为无法用click监听,所以单独提供了监听函数
+</code></pre>
+</div>
+
+<ol>
+  <li>便于拓展，比如这个组件有提供一个图片轮播拓展示例</li>
+</ol>
+
+<h2 id="源码及效果">源码及效果</h2>
+
+<h3 id="效果展示">效果展示</h3>
+<p><a href="https://dailc.github.io/showDemo/carrousel/demo_carrousel_index.html">通用滑动组件实现示例(2D,3D)</a></p>
+
+<p><a href="https://dailc.github.io/showDemo/carrousel/demo_carrousel_gallerySlider.html">滑动组件拓展，3d图片轮播示例</a></p>
+
+<h3 id="源码">源码</h3>
+<p><a href="https://github.com/dailc/showDemo/tree/master/carrousel">一个H5的3D滑动组件实现(兼容2D模式)</a></p>
+
+<h2 id="原文地址">原文地址</h2>
+<p>原文在我个人博客上面</p>
+
+<p><a href="https://dailc.github.io/2016/12/13/carrouselEffect.html">一个H5的3D滑动组件实现(兼容2D模式)</a></p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li><a href="http://www.jianshu.com/p/abb0e3575c70">如何用H5实现一个触屏版的轮播器？</a></li>
+</ul>
+
+					</div>
+					<!-- 上一篇与下一篇-->
+					<section align="right" class="post-next-prev">
+					  <span>
+					    <a  href="/2016/12/09/bookReview_twentyThousandLeaguesUnderTheSea.html" class="active"  >上一篇</a>
+					    &nbsp;&nbsp;&nbsp;
+					    <a  href="/2016/12/17/bookReview_senseAndSensibility.html" class="active"  >下一篇</a>
+					  </span>
+					</section>
+				</div>
+				<!-- 多说-->
+				
+<!--多说评论 -->
+<div id="duoshuo-container">
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="http://localhost:4000/2016/12/13/carrouselEffect.html}" data-title="一个H5的3D滑动组件实现(兼容2D模式)" data-url="http://localhost:4000/2016/12/13/carrouselEffect.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"dailc"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+				
+				
+			</div>
+			
+			<!-- 右侧包括个人介绍，TOC菜单-->
+			<div class="col-md-3">
+				<!-- 右侧人物面板-->
+				<div class="effect1 person-card">
+					
+				 	<a  class="member-image">
+				 			<img src="/asserts/images/img_avatar.jpg" alt="Lichun Dai"/>
+				 	</a>
+				 	<div class="member-info">
+				 		<p class="info-name">
+				 		<a >
+				 			Lichun Dai
+				 		</a>
+				 		</p>
+				 		<p>
+				 			单线程生物，无法同时专注于多件事情。做自己感兴趣的工作，目前偏爱前端。业余爱好:口琴、吉他。
+				 		</p>
+				 	<p class="info-foot">
+				 		<a class="left-card left" href="/blog/archive.html">
+				 			<em>
+				 				博客
+				 			</em>
+				 			<strong>
+				 				28
+				 				
+				 			</strong>
+				 		</a>
+				 		<a class="middle-card left" href="/demo/demo.html">
+				 			<em>
+				 				项目
+				 			</em>
+				 			<strong>
+				 				2
+				 			</strong>
+				 		</a>
+				 		<a class="right-card left" href="/blog/archiveAll.html">
+				 			<em>
+				 				随笔
+				 			</em>
+				 			<strong>
+				 				58
+				 			</strong>
+				 		</a>
+				 	</p>
+				 	<p class="info-social-touch">
+				 		<a target="_blank" href="https://github.com/dailc" ><img src="/asserts/images/icons/favicon_github.ico" alt="GitHub"/> </a>
+						<a target="_blank" href="http://5sing.kugou.com/54188866/default.html"><img src="/asserts/images/icons/favicon_5sing.ico" alt="5sing" /> </a>	
+						<a target="_blank" href="http://changba.com/u/200945262"><img src="/asserts/images/icons/favicon_changba.ico" alt="唱吧" /> </a>
+						<a target="_blank" href="https://www.zhihu.com/people/dailichun"><img src="/asserts/images/icons/favicon_zhihu.ico" alt="知乎" /> </a>
+						<a target="_blank" href="http://www.jianshu.com/u/c104d2a4baec"><img src="/asserts/images/icons/favicon_jianshu.ico" alt="简书" /> </a>
+				 	</p>
+				 	</div>
+				</div>
+
+				 <!-- TOC动态菜单-->
+				  <div class="slideNavContainer">     
+				</div> 				
+					
+			</div> 
+ 
+		</div>
+	</div>
+		
+<script type="text/javascript" src="/asserts/js/post.js" ></script>
+<script type="text/javascript" src="/asserts/js/imageBubble.js" ></script>
+<script>
+	ImageBubble.init('.container img');
+</script>
+	
+	<!-- 脚步,包括版权声明，访问次数等-->
+	<footer class="footer">
+	    <p class="copyright">
+	    	<small>
+	            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/cn/" target="_blank" title="许可协议">©</a> 2016&nbsp;&nbsp;&nbsp;&nbsp;<a href="/about/">Lichun Dai</a>
+	        </small>
+	    </p>
+	    <p class="more-tips">
+	    	<span>Powered by Jekyll</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<span id="busuanzi_container_site_pv">总访客<span id="busuanzi_value_site_uv" class="site-uv"></span>人</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<span id="busuanzi_container_site_pv">总访问<span id="busuanzi_value_site_pv" class="site-pv"></span>次</span>
+	    </p>  
+	</footer>
+
+<script>
+//百度统计
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!--不蒜子 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+</body>
+</html>

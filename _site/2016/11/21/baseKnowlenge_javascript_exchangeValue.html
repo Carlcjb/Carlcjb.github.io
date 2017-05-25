@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JS几种变量交换方式以及性能分析对比 | Dailc的个人主页</title>
+    <meta name="author" content="dailc" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="Everything about dailc" />
+    <meta name="baidu-site-verification" content="cVrw8PsZv7" />
+    <meta name="keywords" content="dailc,戴荔春,戴荔春的博客,dailc的博客" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  	<link href="/asserts/css/default.css" rel="stylesheet" type="text/css" media="all">
+	<script type="text/javascript" src="/asserts/js/app.js" ></script> 
+</head>
+<body>
+	<!--头部 -->
+	<header class="header">
+		<div class="header-container">
+			<section class="site-logo">
+				<a  href="/">撒网要见鱼</a>
+			</section>
+			<button class="collapsed " type="button" >
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		    </button>
+		    <div class="menu-container">
+				<nav class="site-nav">
+					<ul>
+						<li>
+							<a  href="/blog/archiveAll.html">随笔</a>
+						</li>
+						<li>
+							<a  href="/blog/archive.html">博客</a>
+						</li>
+						<li>
+							<a  href="/blog/categories.html">分类</a>
+						</li>
+						<li>
+							<a  href="/blog/tags.html">标签</a>
+						</li>
+						<li>
+							<a  href="/demo/demo.html">Demo</a>
+						</li>
+						<li>
+							<a  href="/favour/music.html">音乐</a>
+						</li>
+						<li>
+							<a  href="/favour/book.html">Book</a>
+						</li>
+						<li>
+							<a  href="/about/timeline.html">时间轴</a>
+						</li>
+						<li>
+							<a  href="/others/collection.html">收藏</a>
+						</li>
+						<li>
+							<a  href="/about/about.html">关于</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="site-search">
+					<input type="text" />
+				</div>
+			</div>
+		</div>
+	</header>
+	<link href="/asserts/css/blog_article_post.css" rel="stylesheet" type="text/css" media="all">
+<link href="/asserts/css/blog_personCard_style.css" rel="stylesheet" type="text/css" media="all">
+<link href="/asserts/css/imageBubble.css" rel="stylesheet" type="text/css" media="all">
+	
+	<div class="wrap">
+		<div class="container">
+			<!-- 左侧，内容，多说评论等-->
+			<div class="col-md-9">
+				<!-- 内容-->
+				<div class="markdown-body">
+					<!--标题区域 -->
+					<div class="title-container">
+					<h1 class="page-title"><a  title="JS几种变量交换方式以及性能分析对比">JS几种变量交换方式以及性能分析对比</a> </h1>
+						<!-- metainfo-->
+						<section class="meta clearfix">
+<span class="time">
+<time datetime="2016-11-21">2016-11-21</time>
+</span>
+
+| 
+<span class="categories">
+	分类
+	    
+	    <a href="/blog/categories.html#blog" title="blog">blog</a>&nbsp;
+	    
+</span>
+
+
+| 
+<span class="tags">
+	标签
+		
+		<a href="/blog/tags.html#javascript" title="javascript">javascript</a>&nbsp;
+		
+		<a href="/blog/tags.html#基础知识" title="基础知识">基础知识</a>&nbsp;
+		
+		<a href="/blog/tags.html#性能分析" title="性能分析">性能分析</a>&nbsp;
+		
+		<a href="/blog/tags.html#变量交换" title="变量交换">变量交换</a>&nbsp;
+		
+</span>
+
+| 
+<span class="views">
+	浏览
+	<a id="busuanzi_value_page_pv"></a>&nbsp;
+</span>
+</section>
+						<section class="right-tips">
+							<span >
+								变量交换
+							</span>
+						</section>
+					</div>
+					<!-- 特别推荐-->
+					
+					<!-- 内容区域-->
+					<div class="content-container">
+						 <h2 id="前言">前言</h2>
+<p>“两个变量之间的值得交换”，这是一个经典的话题，现在也有了很多的成熟解决方案，本文主要是列举几种常用的方案，进行大量计算并分析对比。</p>
+
+<h2 id="起由">起由</h2>
+<p>最近做某个项目时，其中有一个需求是交换数组中的两个元素。当时使用的方法是:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr = [item0,item1,...,itemN];
+//最初使用这段代码来交换第0个和第K(k&lt;N)个元素
+arr[0] = arr.splice(k, 1, arr[0])[0];
+</code></pre>
+</div>
+<p>当时觉得这种方法很优雅，高逼格。。。</p>
+
+<p>后来，业余时间又拿这个研究下了，顺带自己写了个分析工具，和普通方式进行对比。</p>
+
+<p>结果，大大的出乎我的意料，这种方式的效率比我想象的要低的多。以下是其中一个测试结果的图</p>
+
+<p><img src="https://dailc.github.io/jsPerformanceAnalysis/staticresource/performanceAnalysis/demo_js_performanceAnalysis_jsexchangevalue_3.png" alt="" /></p>
+
+<p>于是,基于这点，又研究了下其它的几种数值交换的方式，一起整合进入了分析工具中，才有了本文的这次总结。</p>
+
+<h2 id="js变量交换的几种方式">JS变量交换的几种方式</h2>
+<p>其实关于JS的变量交换，使用最广泛的几种方式基本已经是前端人员必备的技能了，本文正好借此分析研究的契机，列举了本次分析中用到的几种交换方式:</p>
+
+<h3 id="第一种普通临时变量交换方式">第一种:普通临时变量交换方式</h3>
+<p>适用性: <strong>适用于所有类型</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tmp = a;
+a = b;
+b = tmp; 
+</code></pre>
+</div>
+<p>简要说明:
+这是用到的最广泛的一种方式，经实战测试分析，性能也很高</p>
+
+<p>(在JS中,这种方式效率确实很高，而且就算是其它语言中，只要tmp变量提前创建，性能也不会很低，反而是一些杂技派和少数派性能方面很低)</p>
+
+<p>基本上可以说: <strong>经典的才是最优雅的</strong></p>
+
+<h3 id="第二种利用一个新的对象来进行数据交换">第二种:利用一个新的对象来进行数据交换</h3>
+<p>适用性: <strong>适用于所有类型</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>a = {a : b, b : a};
+b = a.b
+;a = a.a;
+</code></pre>
+</div>
+<p>简要说明:
+这种方式在实战中应用的很少</p>
+
+<h3 id="第三种利用一个新的数组来进行数据交换">第三种:利用一个新的数组来进行数据交换</h3>
+<p>适用性: <strong>适用于所有类型</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>a = [b, b=a][0];
+</code></pre>
+</div>
+<p>简要说明:
+这种方式在各大论坛中都有看到有人使用，但经测试实际性能并不高</p>
+
+<h3 id="第四种利用数组交换变量需ejs支持">第四种:利用数组交换变量<strong>(需EJS支持)</strong></h3>
+<p>适用性: <strong>适用于所有类型</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>`[a, b] = [b, a];
+</code></pre>
+</div>
+<p>简要说明:
+这也是在ES6出来后看到有人用的，实际在现有的浏览器中测试，性能很低</p>
+
+<h3 id="第五种利用try-catch交换">第五种:利用try catch交换</h3>
+<p>适用性: <strong>适用于所有类型</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>a=(function(){;
+    try{return b}
+    finally{b=a}}
+)();
+</code></pre>
+</div>
+<p>简要说明:
+这种方法应该是基本没人使用的，也没有什么实用性，而且性能也是属于在各种方法中垫底的</p>
+
+<h3 id="第六种异或操作交换变量第一种方式">第六种:异或操作交换变量第一种方式</h3>
+<p>适用性: <strong>适用于数字或字符串</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>a = (b = (a ^= b) ^ b) ^ a;
+</code></pre>
+</div>
+<p>简要说明:
+异或方法在数字或字符串时用到的比较普遍，而且性能也不低</p>
+
+<h3 id="第七种异或操作交换变量第二种方式">第七种:异或操作交换变量第二种方式</h3>
+<p>适用性: <strong>适用于数字或字符串</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>a ^=b;
+b ^=a;
+a ^=b;
+</code></pre>
+</div>
+<p>简要说明:
+异或方法在数字或字符串时用到的比较普遍，而且性能也不低</p>
+
+<h3 id="第八种数字之间的加减运算来实现第一种加减方式">第八种:数字之间的加减运算来实现，第一种加减方式</h3>
+<p>适用性: <strong>仅适用于数字</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>a = a + b;
+b = a - b; 
+a = a - b; 
+</code></pre>
+</div>
+<p>简要说明:
+这种用法在只用于数字间的交换时，性能也不弱</p>
+
+<h3 id="第九种数字之间的加减运算来实现第一种加减方式">第九种:数字之间的加减运算来实现，第一种加减方式</h3>
+<p>适用性: <strong>仅适用于数字</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>a = b -a +(b = a);
+</code></pre>
+</div>
+<p>简要说明:
+这种用法在只用于数字间的交换时，性能也不弱</p>
+
+<h3 id="第十种利用eval计算">第十种:利用eval计算</h3>
+<p>适用性: <strong>仅适用于数字和字符串</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>eval("a="+b+";b="+a);
+</code></pre>
+</div>
+<p>简要说明:
+这种方式仅用于研究，实战慎用</p>
+
+<p><strong>这种模式执行一万次耗时等于其它执行一亿次…</strong></p>
+
+<h3 id="第十一种数组中利用splice交换两个元素的位置">第十一种:数组中，利用splice交换两个元素的位置</h3>
+<p>适用性: <strong>仅适用于数组元素</strong>
+代码如下:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr[0] = arr.splice(2, 1, arr[0])[0];
+</code></pre>
+</div>
+<p>简要说明:
+这种方式看起来挺优雅的，但实际上性能远远比不上临时变量那种</p>
+
+<h2 id="各种交换方式的性能对比">各种交换方式的性能对比</h2>
+<p>上述列举了几种方式都有一一做过对比分析，基本上可以得出的结论是:</p>
+
+<p><strong>还是老老实实的用回临时变量交换吧，经典，优雅，而且保证不会出什么幺蛾子</strong></p>
+
+<h3 id="性能对比截图">性能对比截图</h3>
+
+<h4 id="分析结果1">分析结果1</h4>
+<p>以下截图中的数据是，在chrome中运行了一亿次后得出的结论<em>(每次运行100万次,一共100个循环，得到的分析结果)</em>
+<img src="https://dailc.github.io/jsPerformanceAnalysis/staticresource/performanceAnalysis/demo_js_performanceAnalysis_jsexchangevalue_4.png" alt="" />
+可以看出,tmp变量交换最快,try catch最慢</p>
+
+<h4 id="分析结果2">分析结果2</h4>
+<p>以下截图数据是，在chrome (支持es6)中运行了100万次后得出的结论<em>(每次运行1万次,一共100个循环，得到的分析结果)</em>
+<img src="https://dailc.github.io/jsPerformanceAnalysis/staticresource/performanceAnalysis/demo_js_performanceAnalysis_jsexchangevalue_5.png" alt="" /></p>
+
+<p><img src="https://dailc.github.io/jsPerformanceAnalysis/staticresource/performanceAnalysis/demo_js_performanceAnalysis_jsexchangevalue_3.png" alt="" />
+可以看出,eval最慢,splice性能较低，tmp变量交换很稳定</p>
+
+<h2 id="分析工具示例demo">分析工具示例Demo</h2>
+<p>如下demo中可以使用分析工具进行 JS变量交换方式分析对比</p>
+
+<p><a href="https://dailc.github.io/jsPerformanceAnalysis/html/performanceAnalysis/demo_performanceAnalysis_jsexchangevalue.html">JS几种变量交换方式分析比较</a></p>
+
+<h2 id="原文链接">原文链接</h2>
+<p>同步更新到了我个人博客上</p>
+
+<p><a href="https://dailc.github.io/2016/11/21/baseKnowlenge_javascript_exchangeValue.html">JS几种变量交换方式以及性能分析对比</a></p>
+
+<h2 id="参考">参考</h2>
+<p><a href="https://jsperf.com/exchange-variables-gracefully/2">Exchange Variables Gracefully</a></p>
+
+					</div>
+					<!-- 上一篇与下一篇-->
+					<section align="right" class="post-next-prev">
+					  <span>
+					    <a  href="/2016/11/19/bookReview_thesecretgarden.html" class="active"  >上一篇</a>
+					    &nbsp;&nbsp;&nbsp;
+					    <a  href="/2016/11/21/baseKnowlenge_javascriptPerformanceAnalysis.html" class="active"  >下一篇</a>
+					  </span>
+					</section>
+				</div>
+				<!-- 多说-->
+				
+<!--多说评论 -->
+<div id="duoshuo-container">
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="http://localhost:4000/2016/11/21/baseKnowlenge_javascript_exchangeValue.html}" data-title="JS几种变量交换方式以及性能分析对比" data-url="http://localhost:4000/2016/11/21/baseKnowlenge_javascript_exchangeValue.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"dailc"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+				
+				
+			</div>
+			
+			<!-- 右侧包括个人介绍，TOC菜单-->
+			<div class="col-md-3">
+				<!-- 右侧人物面板-->
+				<div class="effect1 person-card">
+					
+				 	<a  class="member-image">
+				 			<img src="/asserts/images/img_avatar.jpg" alt="Lichun Dai"/>
+				 	</a>
+				 	<div class="member-info">
+				 		<p class="info-name">
+				 		<a >
+				 			Lichun Dai
+				 		</a>
+				 		</p>
+				 		<p>
+				 			单线程生物，无法同时专注于多件事情。做自己感兴趣的工作，目前偏爱前端。业余爱好:口琴、吉他。
+				 		</p>
+				 	<p class="info-foot">
+				 		<a class="left-card left" href="/blog/archive.html">
+				 			<em>
+				 				博客
+				 			</em>
+				 			<strong>
+				 				28
+				 				
+				 			</strong>
+				 		</a>
+				 		<a class="middle-card left" href="/demo/demo.html">
+				 			<em>
+				 				项目
+				 			</em>
+				 			<strong>
+				 				2
+				 			</strong>
+				 		</a>
+				 		<a class="right-card left" href="/blog/archiveAll.html">
+				 			<em>
+				 				随笔
+				 			</em>
+				 			<strong>
+				 				58
+				 			</strong>
+				 		</a>
+				 	</p>
+				 	<p class="info-social-touch">
+				 		<a target="_blank" href="https://github.com/dailc" ><img src="/asserts/images/icons/favicon_github.ico" alt="GitHub"/> </a>
+						<a target="_blank" href="http://5sing.kugou.com/54188866/default.html"><img src="/asserts/images/icons/favicon_5sing.ico" alt="5sing" /> </a>	
+						<a target="_blank" href="http://changba.com/u/200945262"><img src="/asserts/images/icons/favicon_changba.ico" alt="唱吧" /> </a>
+						<a target="_blank" href="https://www.zhihu.com/people/dailichun"><img src="/asserts/images/icons/favicon_zhihu.ico" alt="知乎" /> </a>
+						<a target="_blank" href="http://www.jianshu.com/u/c104d2a4baec"><img src="/asserts/images/icons/favicon_jianshu.ico" alt="简书" /> </a>
+				 	</p>
+				 	</div>
+				</div>
+
+				 <!-- TOC动态菜单-->
+				  <div class="slideNavContainer">     
+				</div> 				
+					
+			</div> 
+ 
+		</div>
+	</div>
+		
+<script type="text/javascript" src="/asserts/js/post.js" ></script>
+<script type="text/javascript" src="/asserts/js/imageBubble.js" ></script>
+<script>
+	ImageBubble.init('.container img');
+</script>
+	
+	<!-- 脚步,包括版权声明，访问次数等-->
+	<footer class="footer">
+	    <p class="copyright">
+	    	<small>
+	            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/cn/" target="_blank" title="许可协议">©</a> 2016&nbsp;&nbsp;&nbsp;&nbsp;<a href="/about/">Lichun Dai</a>
+	        </small>
+	    </p>
+	    <p class="more-tips">
+	    	<span>Powered by Jekyll</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<span id="busuanzi_container_site_pv">总访客<span id="busuanzi_value_site_uv" class="site-uv"></span>人</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<span id="busuanzi_container_site_pv">总访问<span id="busuanzi_value_site_pv" class="site-pv"></span>次</span>
+	    </p>  
+	</footer>
+
+<script>
+//百度统计
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!--不蒜子 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+</body>
+</html>

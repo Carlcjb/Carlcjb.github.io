@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>费马小定理的应用-n个1组成的整数能被2013整除，n至少为多大？ | Dailc的个人主页</title>
+    <meta name="author" content="dailc" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="Everything about dailc" />
+    <meta name="baidu-site-verification" content="cVrw8PsZv7" />
+    <meta name="keywords" content="dailc,戴荔春,戴荔春的博客,dailc的博客" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  	<link href="/asserts/css/default.css" rel="stylesheet" type="text/css" media="all">
+	<script type="text/javascript" src="/asserts/js/app.js" ></script> 
+</head>
+<body>
+	<!--头部 -->
+	<header class="header">
+		<div class="header-container">
+			<section class="site-logo">
+				<a  href="/">撒网要见鱼</a>
+			</section>
+			<button class="collapsed " type="button" >
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		    </button>
+		    <div class="menu-container">
+				<nav class="site-nav">
+					<ul>
+						<li>
+							<a  href="/blog/archiveAll.html">随笔</a>
+						</li>
+						<li>
+							<a  href="/blog/archive.html">博客</a>
+						</li>
+						<li>
+							<a  href="/blog/categories.html">分类</a>
+						</li>
+						<li>
+							<a  href="/blog/tags.html">标签</a>
+						</li>
+						<li>
+							<a  href="/demo/demo.html">Demo</a>
+						</li>
+						<li>
+							<a  href="/favour/music.html">音乐</a>
+						</li>
+						<li>
+							<a  href="/favour/book.html">Book</a>
+						</li>
+						<li>
+							<a  href="/about/timeline.html">时间轴</a>
+						</li>
+						<li>
+							<a  href="/others/collection.html">收藏</a>
+						</li>
+						<li>
+							<a  href="/about/about.html">关于</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="site-search">
+					<input type="text" />
+				</div>
+			</div>
+		</div>
+	</header>
+	<link href="/asserts/css/blog_article_post.css" rel="stylesheet" type="text/css" media="all">
+<link href="/asserts/css/blog_personCard_style.css" rel="stylesheet" type="text/css" media="all">
+<link href="/asserts/css/imageBubble.css" rel="stylesheet" type="text/css" media="all">
+	
+	<div class="wrap">
+		<div class="container">
+			<!-- 左侧，内容，多说评论等-->
+			<div class="col-md-9">
+				<!-- 内容-->
+				<div class="markdown-body">
+					<!--标题区域 -->
+					<div class="title-container">
+					<h1 class="page-title"><a  title="费马小定理的应用-n个1组成的整数能被2013整除，n至少为多大？">费马小定理的应用-n个1组成的整数能被2013整除，n至少为多大？</a> </h1>
+						<!-- metainfo-->
+						<section class="meta clearfix">
+<span class="time">
+<time datetime="2017-03-04">2017-03-04</time>
+</span>
+
+| 
+<span class="categories">
+	分类
+	    
+	    <a href="/blog/categories.html#blog" title="blog">blog</a>&nbsp;
+	    
+</span>
+
+
+| 
+<span class="tags">
+	标签
+		
+		<a href="/blog/tags.html#算法" title="算法">算法</a>&nbsp;
+		
+		<a href="/blog/tags.html#数论" title="数论">数论</a>&nbsp;
+		
+</span>
+
+| 
+<span class="views">
+	浏览
+	<a id="busuanzi_value_page_pv"></a>&nbsp;
+</span>
+</section>
+						<section class="right-tips">
+							<span >
+								算法
+							</span>
+						</section>
+					</div>
+					<!-- 特别推荐-->
+					
+					<!-- 内容区域-->
+					<div class="content-container">
+						 <h2 id="前言">前言</h2>
+<p>在逛<code class="highlighter-rouge">segmentfault</code>论坛时，看到了这样一个提问，于是花了点时间详细的解答了，顺便记录在本文中。</p>
+
+<p>原题链接<a href="https://segmentfault.com/q/1010000008553427/a-1020000008559091">https://segmentfault.com/q/1010000008553427/a-1020000008559091</a></p>
+
+<h2 id="思路与大纲">思路与大纲</h2>
+<p>遇到这个问题时，第一个想法就是先用代码进行暴力破解，然后又发现整数整除问题可以用费马小定理进行分析，于是就有了以下回答题纲:</p>
+
+<ul>
+  <li>代码解法(JS实现)</li>
+  <li>数论解法(费马小定理)</li>
+</ul>
+
+<h2 id="代码解法">代码解法</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>function getMinDividedNum(n) {
+    var sum = 1,
+    len = 1;
+    while (sum % n) {
+        len++;
+        sum = (sum % n) * 10 + 1;
+    }
+    return len;
+}
+
+// 测试用例
+// 注意，并不是所有数字都能输入，只能是素数或者由素数乘积组成的数
+// 这里就相当于直接人为的约定了输入前提了
+var num = 2013;
+console.log('n:' + num + ',len:' + getMinDividedNum(num));
+// 输出:n:2013,len:60
+
+</code></pre>
+</div>
+
+<h3 id="代码详解">代码详解</h3>
+<p>以上代码的核心其实就是判断<code class="highlighter-rouge">1,11,111</code>等N位数能否被n整除，也就是<code class="highlighter-rouge">sum=sum*10+1</code>。
+但是考虑到最大值边界问题，于是将上述公式换为了
+<code class="highlighter-rouge">sum= (sum % n)*10+1</code></p>
+
+<p>之所以能这样转换，是因为: (举例)</p>
+
+<ul>
+  <li>譬如判断 <code class="highlighter-rouge">111</code>是否能被3整除</li>
+  <li>可以是 <code class="highlighter-rouge">(1*10+1)*10+1</code></li>
+  <li>也可以是判断
+    <ul>
+      <li>第一步: 1%3=1 (1整除3的余数为1）</li>
+      <li>第二步: 11%3=2 (11整除3的余数为2）</li>
+      <li>第三步: 21%3=0 (符合条件)</li>
+    </ul>
+  </li>
+  <li>换一个思路，假如判断(8+7)是否能被3整除，那么我们只需要现将它们能被3整除的部分去除掉，用余数累加起来判断即可，也就是说只需要判断<code class="highlighter-rouge">2+1</code>能否被3整除即可</li>
+</ul>
+
+<h2 id="数论解法">数论解法</h2>
+
+<h3 id="费马小定理简介">费马小定理简介</h3>
+<p>首先得知道的是，费马小定理是欧拉定理的一种特殊情况，欧拉定理描述的是关于同余的性质，而费马定理如下:</p>
+
+<p><strong>假如a是整数，p是质数，且a，p互质(两者只有一个公约数1)，那么a的(p-1)次方除以p的余数恒等于1</strong></p>
+
+<p>即<code class="highlighter-rouge">a^(p-1)%p=1</code></p>
+
+<h3 id="费马小定理在本题中的应用">费马小定理在本题中的应用</h3>
+<p>关键来了，本题与费马小定理有什么关系呢？</p>
+
+<p>本题中，<code class="highlighter-rouge">2013=3*11*61</code>，所以能被2013整除，就需要满足</p>
+
+<ul>
+  <li>能被3整除</li>
+  <li>能被11整除</li>
+  <li>能被61整除</li>
+</ul>
+
+<p>而前两者很容易就根据下面的条件判断出:</p>
+
+<ul>
+  <li>若一个整数的数字和能被3整除，则这个整数能被3整除。</li>
+  <li>若一个整数的奇位数字之和与偶位数字之和的差能被11整除，则这个数能被11整除。</li>
+</ul>
+
+<p>因此马上就可以将条件转换为:</p>
+
+<ul>
+  <li>n得是3的倍数(因为n个1加起来要是3的倍数)</li>
+  <li>n得是2的倍数(奇位和偶数直接的差为0)</li>
+  <li>因此n是6的倍数</li>
+  <li>这个数(n个1)能被61整除</li>
+</ul>
+
+<p>接下来就剩下了一个问题: n个1能被61整除，需要满足什么？接下来费马小定理就派得上用处了。</p>
+
+<p>我们可以得知: <strong>61和10互素</strong>。
+所以套用上述的公式，可以得出: <code class="highlighter-rouge">10^(60)%61=1</code>，即<code class="highlighter-rouge">10^(60)=1 (mod 61)</code>
+所以:<code class="highlighter-rouge">10^(60)-1=0 (mod 61)</code>
+而<code class="highlighter-rouge">10^60 -1 </code> 就是<code class="highlighter-rouge">60个9组成的数</code>，也就是说 60个9组成的数能够被61整除。
+那么自然60个1组成的数能够被61整除(因为61与3无关)。
+同时60又是6的倍数，因此60个n组成的数能够被2013整除。</p>
+
+<p>继续判断，费马小定理并不保证(p-1)是最小的指数，但是一定是最小指数的倍数。
+所以继续判断60的约数，60的符合条件的约数(6的倍数)有，6，12，30，60。
+依次计算<code class="highlighter-rouge">6,12,30</code>这三个数，发现都不满足条件，于是得出只有60满足条件。</p>
+
+<p>因此得出了结论:  <strong>n至少为60时，n个1组成的数能够被2013整除</strong></p>
+
+<h2 id="附录">附录</h2>
+
+<h3 id="原文链接">原文链接</h3>
+<p><a href="https://dailc.github.io/2017/03/04/fermatsLittleTheoremN1.html">https://dailc.github.io/2017/03/04/fermatsLittleTheoremN1.html</a></p>
+
+					</div>
+					<!-- 上一篇与下一篇-->
+					<section align="right" class="post-next-prev">
+					  <span>
+					    <a  href="/2017/02/25/traditionalCompaniesCannotPromoteRNAndWeex.html" class="active"  >上一篇</a>
+					    &nbsp;&nbsp;&nbsp;
+					    <a  href="/2017/03/04/bookReview_theThreeMusketeers.html" class="active"  >下一篇</a>
+					  </span>
+					</section>
+				</div>
+				<!-- 多说-->
+				
+<!--多说评论 -->
+<div id="duoshuo-container">
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="http://localhost:4000/2017/03/04/fermatsLittleTheoremN1.html}" data-title="费马小定理的应用-n个1组成的整数能被2013整除，n至少为多大？" data-url="http://localhost:4000/2017/03/04/fermatsLittleTheoremN1.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"dailc"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+				
+				
+			</div>
+			
+			<!-- 右侧包括个人介绍，TOC菜单-->
+			<div class="col-md-3">
+				<!-- 右侧人物面板-->
+				<div class="effect1 person-card">
+					
+				 	<a  class="member-image">
+				 			<img src="/asserts/images/img_avatar.jpg" alt="Lichun Dai"/>
+				 	</a>
+				 	<div class="member-info">
+				 		<p class="info-name">
+				 		<a >
+				 			Lichun Dai
+				 		</a>
+				 		</p>
+				 		<p>
+				 			单线程生物，无法同时专注于多件事情。做自己感兴趣的工作，目前偏爱前端。业余爱好:口琴、吉他。
+				 		</p>
+				 	<p class="info-foot">
+				 		<a class="left-card left" href="/blog/archive.html">
+				 			<em>
+				 				博客
+				 			</em>
+				 			<strong>
+				 				28
+				 				
+				 			</strong>
+				 		</a>
+				 		<a class="middle-card left" href="/demo/demo.html">
+				 			<em>
+				 				项目
+				 			</em>
+				 			<strong>
+				 				2
+				 			</strong>
+				 		</a>
+				 		<a class="right-card left" href="/blog/archiveAll.html">
+				 			<em>
+				 				随笔
+				 			</em>
+				 			<strong>
+				 				58
+				 			</strong>
+				 		</a>
+				 	</p>
+				 	<p class="info-social-touch">
+				 		<a target="_blank" href="https://github.com/dailc" ><img src="/asserts/images/icons/favicon_github.ico" alt="GitHub"/> </a>
+						<a target="_blank" href="http://5sing.kugou.com/54188866/default.html"><img src="/asserts/images/icons/favicon_5sing.ico" alt="5sing" /> </a>	
+						<a target="_blank" href="http://changba.com/u/200945262"><img src="/asserts/images/icons/favicon_changba.ico" alt="唱吧" /> </a>
+						<a target="_blank" href="https://www.zhihu.com/people/dailichun"><img src="/asserts/images/icons/favicon_zhihu.ico" alt="知乎" /> </a>
+						<a target="_blank" href="http://www.jianshu.com/u/c104d2a4baec"><img src="/asserts/images/icons/favicon_jianshu.ico" alt="简书" /> </a>
+				 	</p>
+				 	</div>
+				</div>
+
+				 <!-- TOC动态菜单-->
+				  <div class="slideNavContainer">     
+				</div> 				
+					
+			</div> 
+ 
+		</div>
+	</div>
+		
+<script type="text/javascript" src="/asserts/js/post.js" ></script>
+<script type="text/javascript" src="/asserts/js/imageBubble.js" ></script>
+<script>
+	ImageBubble.init('.container img');
+</script>
+	
+	<!-- 脚步,包括版权声明，访问次数等-->
+	<footer class="footer">
+	    <p class="copyright">
+	    	<small>
+	            <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/cn/" target="_blank" title="许可协议">©</a> 2016&nbsp;&nbsp;&nbsp;&nbsp;<a href="/about/">Lichun Dai</a>
+	        </small>
+	    </p>
+	    <p class="more-tips">
+	    	<span>Powered by Jekyll</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<span id="busuanzi_container_site_pv">总访客<span id="busuanzi_value_site_uv" class="site-uv"></span>人</span>&nbsp;&nbsp;&nbsp;&nbsp;
+	    	<span id="busuanzi_container_site_pv">总访问<span id="busuanzi_value_site_pv" class="site-pv"></span>次</span>
+	    </p>  
+	</footer>
+
+<script>
+//百度统计
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!--不蒜子 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+</body>
+</html>
