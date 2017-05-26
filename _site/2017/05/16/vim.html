@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>vim常用基本命令</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="一个小白码农的博客">
+<!--<meta name="keywords" content="java,github,git,jekyll,gollum,jquery,flash">-->
+<meta name="keywords" content="vim常用基本命令">
+<meta name="baidu-site-verification" content="HQAmWn1tQw" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/hc.css" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/dpflow.css" rel="stylesheet">
+<link href="/css/sweet-alert.css" rel="stylesheet">
+<link href="/css/danceword.css" rel="stylesheet">
+<link href="/css/aos.css" rel="stylesheet">
+<link href="/css/font-awesome.css" rel="stylesheet">
+<link href="/css/button.css" rel="stylesheet">
+<link href="/css/baguetteBox.css" rel="stylesheet">
+<!-- HTML4 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif] d-->
+
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b0dbe44f94ebb13f2e1e9078d5b571cc";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body>
+    <!-- Bootstrap core JavaScript-->
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/hc.js"></script>
+<script src="/js/mouse.js"></script>
+<script src="/js/sweet-alert.min.js"></script>
+<script src="/js/dpflow.js"></script>
+<script src="/js/dpflow-func.js"></script>
+<script src="/js/danceword.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/gotop.js"></script>
+<script src="/js/baguetteBox.js"></script>
+<script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <div id = "wrapper">
+      <div class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <p class="navbar-brand">阿兵哥的博客</p>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+      <li><a href="/index.html">时光荏苒</a></li>
+      <li><a href="/blog.html">随手记笔</a></li>
+      <li><a href="/fun.html">玩的开心</a></li>
+      <!--li><a href="/tools.html">小工小具</a></li-->
+      <li><a href="/about.html">一叶知秋</a></li>
+      <li><a href="/talk.html">你吐我槽</a></li>
+      <h5 align="center"><a class="brand" href="https://github.com/liangrengongzuoshi" target="_blank" title="Mr.Liang's github."><i class="fa fa-github-square">Mr.Liang</i></a></h5>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li><img class="head-pic" alt="Mr.Liang" src="/images/head.jpg"></li>
+    <li><img class="head-lz" src="/images/liangzai.gif"></li>
+    <li class="sidebar-brand"><h3>一个小白码农的博客</h3></li>
+    <hr />
+      <li><a href="/index.html">时光荏苒</a></li>
+      <li><a href="/blog.html">随手记笔</a></li>
+      <li><a href="/fun.html">玩的开心</a></li>
+      <li><a href="/tools.html">小工小具</a></li>
+      <li><a href="/about.html">一叶知秋</a></li>
+      <li><a href="/talk.html">你吐我槽</a></li>
+      <h5 class="li-github" align="center"><hr><a class="brand" href="https://github.com/liangrengongzuoshi" target="_blank" title="Mr.Liang's github."><i class="fa fa-github-square">Mr.Liang</i></a></h5>
+      <h5 class="li-see" align="center">
+	 &copy;2017
+	 <span id="busuanzi_container_site_uv"><i class="fa fa-user" title="本站访问人次"><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></i></span>
+   	 <span id="busuanzi_container_site_pv"><i class="fa fa-eye" title="本站访问总量"><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></i></span>
+      </h5>
+  </ul>
+</div>
+
+      <div class="container">
+        <link href="/css/highlight.css" rel="stylesheet">
+<div id="article" aos="zoom-in-up">
+  <div class="article-title">vim常用基本命令</div>
+  <p class="meta">
+    <small>
+      &nbsp;<i class="fa fa-calendar-o"></i> 16 May 2017
+    </small>
+  </p> <hr/>
+  <div class="post">
+    <h2 id="文件">文件</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>vim file1 file2...              同时打开多文件
+vimdiff [文件1] [文件2]         比对文件差异
+
+:split              多屏显示(横向)
+:vsplit             多屏显示(纵向)
+
+vim -o 文件1 文件   横向分屏打开文件
+vim -O 文件1 文件   纵向分屏打开文件
+
+:vs 文件        纵向分屏打开文件
+:sp 文件        横向分屏打开文件
+
+:q或:close      关闭当前窗口
+:only           关闭除当前窗口之外其他窗口
+
+:qa             关闭所有窗口
+ctrl+w          切换窗口
+
+：bn                下一个文件
+：bp                上一个文件
+
+:new 文件名.后缀    新建文件
+:e 文件名    打开文件
+</code></pre>
+</div>
+
+<h2 id="正常模式">正常模式</h2>
+<h4 id="剪切">剪切</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>dd:剪贴当前行
+ndd:剪贴n行，，（n是一个数字）
+
+dw:从光标处开始,剪切至一个单词/句子的末尾,包括空格
+de:从光标处开始,剪切至一个单词/句子的末尾,不包括空格
+
+d^:从当前光标剪切到“该行”首
+d&amp;:从当前光标剪切到“该行”末
+d0:从当前光标剪切至行首
+
+dH:剪切从当前行-至所显示屏幕顶部的全部行
+dgg:剪切从当前行-至首行
+
+dL:剪切从当前行-至所显示屏幕底的全部行
+dG:剪切从当前行-至末尾
+x : 剪切一个字符
+
+ggdG:剪切全文
+
+</code></pre>
+</div>
+
+<h4 id="复制">复制</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>yy:复制当前行
+nyy:复制n行，，（n是一个数字）
+
+yw:复制从光标处至一个单词/句子的末尾,包括空格
+ye:复制从光标处至一个单词/句子的末尾,不包括空格
+
+y$:从当前光标复制到“该行”末
+y0:从当前光标(不包括光标)复制到行首
+
+yH:复制从当前行-至所显示屏幕顶部的全部行
+ygg:复制从当前行-至首行
+
+yL:复制从当前行-至所显示屏幕底的全部行
+yG:复制从当前行-至末尾
+
+ggyG	复制全文
+</code></pre>
+</div>
+<h4 id="删除标记di标记">删除标记：di[标记]</h4>
+<blockquote>
+  <p>例如：综合（综合有线）<br />
+如果要删除括号内容</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>将光标移至（，按di并按（
+其他标记如：“{[ 等
+</code></pre>
+</div>
+
+<h4 id="其他">其他</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>u:撤销
+ctrl+r: 反撤销
+
+p:粘贴，光标下一行
+P:粘贴，光标上一行
+
+h--j--k--l：：光标 左-下-上-右 移动
+
+o:向下插入一行，，直接进入Insert模式
+O:向上插入一行，，直接进入Insert模式
+
+w:依次跳至每个单词的词首
+e:依次跳至每个单词的词尾
+
+gg:光标移至文档开头
+G:光标移至文档末尾
+
+Ctrl + u：向文件首翻半屏 
+Ctrl + d：向文件尾翻半屏 
+
+Ctrl + b：向文件首翻一屏 
+Ctrl + f：向文件尾翻一屏 
+
+i：当前光标插入
+a：当前光标下一个位置插入
+
+I：快速定位到行首并插入
+^：(shift+6)快速移到行首
+
+A：快速定位到行尾并插入
+$：(shift+4)快速移到行尾
+
+
+*：当光标移至某个单词上，按*会在文本中搜索该单词，并标注
+.(点)：重复上一个命令
+
+ctrl+g：列出光标所在行的行号。
+nG：例如：“15G”，移动光标到该文件的第15行行首
+</code></pre>
+</div>
+
+<h2 id="命令模式">命令模式</h2>
+<h4 id="常用命令">常用命令</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>q：退出
+wq：保存退出
+
+q!：强制退出
+w!：强制写入
+
+e!   : 恢复到最初状态
+
+x：保存后离开
+write：保存当前文件
+
+/word：搜索，自上而下
+?word：搜索，自下而上
+
+set nu：列出行号
+set nonu：取消列出行号
+
+##搜索关键词时
+    n:搜索下一个
+    N:搜索下一个
+</code></pre>
+</div>
+<h4 id="替换">替换</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>○ : s/test/target/     替换当前行第一个 test 为 target
+○ : s/test/target/g   替换当前行所有 test 为 target
+○ 
+○ :n,$s/test/target/   替换从第n行开始到最后一行，每行第一个test为target
+○ :n,$s/test/target/g  替换从第n行开始到最后一行，每行所有test为target
+○ 如果n为.  则代表从当前行开始到最后一行
+○ 
+○ :%s/test/target/     替换所有行第一个test为target
+○ :%s/test/target/g   替换所有行所有test为target
+○ 
+○ ：g/pattern/s/old/new/g    将会把包含pattern的行中，把所有old替换为new
+○ 
+○ ：%s/^.*\(\d+\)/\1/      将^.*\(\d+\)替换成\d+     \1正则组引用
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>:g/^\s*$/d  删除空白行
+:%d         全部删除（普通模式：ggdG）
+</code></pre>
+</div>
+<h3 id="其他-1">其他</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>:earlier 1m     回退到1分钟之前
+:later  1m      和earlier相反
+:%TOhtml        转成html显示
+
+:%!xxd      16进制显示
+:%!xxd -r   恢复
+</code></pre>
+</div>
+
+<h2 id="插入模式">插入模式</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>ctrl+shift+c   复制
+ctrl+shift+v   粘贴
+</code></pre>
+</div>
+<h2 id="可视模式">可视模式</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>v，V,ctrl+v：进入可视模式
+</code></pre>
+</div>
+
+
+  </div>
+  <div class="dashang baguetteBoxThree gallery">
+	<a href="/images/shang.gif">
+		<button class="button button-raised button-action button-circle button-jumbo">
+			<span>打赏</span>
+		</button>
+	</a>
+</div>
+
+  <div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_cqq"></a>
+	<a class="jiathis_button_ydnote"></a>
+	<a class="jiathis_button_linkedin"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">var jiathis_config = {data_track_clickback:'true'};</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2133540" charset="utf-8"></script>
+
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "b08f6f361cff4c61a75f8fdcdd051e1f",
+      target: "cloud-tie-wrapper"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+  </script>
+</div>
+
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<ul class="pager">
+
+  <li class="next"><a href="/2017/05/14/git.html">git常用基本命令 &rarr;</a></li>
+
+
+  <li class="previous"><a href="/2017/05/17/vim-conf.html">&larr; vim的简单配置</a></li>
+
+</ul>
+
+
+      </div>
+    </div>
+	<div style="display:none;" id="rocket-to-top">
+	<div style="opacity:0;display:block;" class="level-2"></div>
+	<div class="level-3"></div>
+</div>
+
+    <script>
+		AOS.init({easing: 'ease-out-back',duration: 1000});
+		window.onload = function() {
+			baguetteBox.run('.baguetteBoxThree', {
+				animation: 'fadeIn',
+			});
+		};
+	</script> 
+  </body>
+</html>

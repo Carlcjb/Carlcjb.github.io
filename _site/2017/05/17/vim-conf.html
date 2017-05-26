@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>vim的简单配置</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="一个小白码农的博客">
+<!--<meta name="keywords" content="java,github,git,jekyll,gollum,jquery,flash">-->
+<meta name="keywords" content="vim的简单配置">
+<meta name="baidu-site-verification" content="HQAmWn1tQw" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/hc.css" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/dpflow.css" rel="stylesheet">
+<link href="/css/sweet-alert.css" rel="stylesheet">
+<link href="/css/danceword.css" rel="stylesheet">
+<link href="/css/aos.css" rel="stylesheet">
+<link href="/css/font-awesome.css" rel="stylesheet">
+<link href="/css/button.css" rel="stylesheet">
+<link href="/css/baguetteBox.css" rel="stylesheet">
+<!-- HTML4 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif] d-->
+
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?b0dbe44f94ebb13f2e1e9078d5b571cc";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+  </head>
+  <body>
+    <!-- Bootstrap core JavaScript-->
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/hc.js"></script>
+<script src="/js/mouse.js"></script>
+<script src="/js/sweet-alert.min.js"></script>
+<script src="/js/dpflow.js"></script>
+<script src="/js/dpflow-func.js"></script>
+<script src="/js/danceword.js"></script>
+<script src="/js/aos.js"></script>
+<script src="/js/gotop.js"></script>
+<script src="/js/baguetteBox.js"></script>
+<script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <div id = "wrapper">
+      <div class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <p class="navbar-brand">阿兵哥的博客</p>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+      <li><a href="/index.html">时光荏苒</a></li>
+      <li><a href="/blog.html">随手记笔</a></li>
+      <li><a href="/fun.html">玩的开心</a></li>
+      <!--li><a href="/tools.html">小工小具</a></li-->
+      <li><a href="/about.html">一叶知秋</a></li>
+      <li><a href="/talk.html">你吐我槽</a></li>
+      <h5 align="center"><a class="brand" href="https://github.com/liangrengongzuoshi" target="_blank" title="Mr.Liang's github."><i class="fa fa-github-square">Mr.Liang</i></a></h5>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li><img class="head-pic" alt="Mr.Liang" src="/images/head.jpg"></li>
+    <li><img class="head-lz" src="/images/liangzai.gif"></li>
+    <li class="sidebar-brand"><h3>一个小白码农的博客</h3></li>
+    <hr />
+      <li><a href="/index.html">时光荏苒</a></li>
+      <li><a href="/blog.html">随手记笔</a></li>
+      <li><a href="/fun.html">玩的开心</a></li>
+      <li><a href="/tools.html">小工小具</a></li>
+      <li><a href="/about.html">一叶知秋</a></li>
+      <li><a href="/talk.html">你吐我槽</a></li>
+      <h5 class="li-github" align="center"><hr><a class="brand" href="https://github.com/liangrengongzuoshi" target="_blank" title="Mr.Liang's github."><i class="fa fa-github-square">Mr.Liang</i></a></h5>
+      <h5 class="li-see" align="center">
+	 &copy;2017
+	 <span id="busuanzi_container_site_uv"><i class="fa fa-user" title="本站访问人次"><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></i></span>
+   	 <span id="busuanzi_container_site_pv"><i class="fa fa-eye" title="本站访问总量"><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></i></span>
+      </h5>
+  </ul>
+</div>
+
+      <div class="container">
+        <link href="/css/highlight.css" rel="stylesheet">
+<div id="article" aos="zoom-in-up">
+  <div class="article-title">vim的简单配置</div>
+  <p class="meta">
+    <small>
+      &nbsp;<i class="fa fa-calendar-o"></i> 17 May 2017
+    </small>
+  </p> <hr/>
+  <div class="post">
+    <h3 id="vim简单配置让vim美观点">vim简单配置，让vim美观点</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>"在vimrc中，双引号开头的行，将被当作注释忽略
+"关闭vi兼容模式
+set nocompatible
+"设置行号
+set nu
+"标尺
+set ruler
+"入的命令显示出来
+set showcmd
+"命令行（在状态行下）的高度，设置为1
+set cmdheight=1
+"背景使用黑色
+set background=dark
+"编码
+set enc=utf-8
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+"语言设置
+set langmenu=zh_CN.UTF-8
+"总是显示状态行
+set laststatus=2
+"命令行（在状态行下）的高度，默认为1，这里是2"
+set cmdheight=2
+"光标移动到buffer的顶部和底部时保持三行差距
+set scrolloff=3
+"忽略大小写检索
+set ignorecase
+"检索高亮
+set hlsearch
+"输入检索时动态变化
+"set incsearch
+"关闭错误响铃
+set noerrorbells
+"设置无响铃
+set novisualbell
+":命令显示历史
+set history=100
+"高亮当前行 
+set cursorline
+"设置魔术
+set magic
+"设定tab长度4
+set tabstop=4
+"光标移动到buffer的顶部和底部时保持3行距离
+set scrolloff=3
+"态行显示的内容
+set statusline=%F%m%r%h%w\ [FORMAT=%{&amp;ff}]\ [TYPE=%Y]\ [POS=%l,%v]\ [%p%%]\ %{strftime(\"20%y/%m/%d-%H:%M\")}
+"设置在状态行显示的信息
+set foldcolumn=0
+set foldmethod=indent 
+set foldlevel=3 
+</code></pre>
+</div>
+
+  </div>
+  <div class="dashang baguetteBoxThree gallery">
+	<a href="/images/shang.gif">
+		<button class="button button-raised button-action button-circle button-jumbo">
+			<span>打赏</span>
+		</button>
+	</a>
+</div>
+
+  <div class="jiathis_style_32x32">
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_cqq"></a>
+	<a class="jiathis_button_ydnote"></a>
+	<a class="jiathis_button_linkedin"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">var jiathis_config = {data_track_clickback:'true'};</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2133540" charset="utf-8"></script>
+
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "b08f6f361cff4c61a75f8fdcdd051e1f",
+      target: "cloud-tie-wrapper"
+    };
+    var yunManualLoad = true;
+    Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+  </script>
+</div>
+
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<ul class="pager">
+
+  <li class="next"><a href="/2017/05/16/vim.html">vim常用基本命令 &rarr;</a></li>
+
+
+  <li class="previous"><a href="/2017/05/26/linux.html">&larr; linux一些常用命令</a></li>
+
+</ul>
+
+
+      </div>
+    </div>
+	<div style="display:none;" id="rocket-to-top">
+	<div style="opacity:0;display:block;" class="level-2"></div>
+	<div class="level-3"></div>
+</div>
+
+    <script>
+		AOS.init({easing: 'ease-out-back',duration: 1000});
+		window.onload = function() {
+			baguetteBox.run('.baguetteBoxThree', {
+				animation: 'fadeIn',
+			});
+		};
+	</script> 
+  </body>
+</html>

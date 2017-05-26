@@ -1,0 +1,46 @@
+<div class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <p class="navbar-brand">{{ site.name }}</p>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+      <li><a href="{{ site.baseurl }}/index.html">时光荏苒</a></li>
+      <li><a href="{{ site.baseurl }}/blog.html">随手记笔</a></li>
+      <li><a href="{{ site.baseurl }}/fun.html">玩的开心</a></li>
+      <!--li><a href="{{ site.baseurl }}/tools.html">小工小具</a></li-->
+      <li><a href="{{ site.baseurl }}/about.html">一叶知秋</a></li>
+      <li><a href="{{ site.baseurl }}/talk.html">你吐我槽</a></li>
+      <h5 align="center"><a class="brand" href="{{ site.github }}" target="_blank" title="Mr.Liang's github."><i class="fa fa-github-square">Mr.Liang</i></a></h5>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li><img class="head-pic" alt="Mr.Liang" src="{{ site.baseurl }}/images/head.jpg"></li>
+    <li><img class="head-lz" src="{{ site.baseurl}}/images/liangzai.gif"></li>
+    <li class="sidebar-brand"><h3>{{ site.description }}</h3></li>
+    <hr />
+      <li><a href="{{ site.baseurl }}/index.html">时光荏苒</a></li>
+      <li><a href="{{ site.baseurl }}/blog.html">随手记笔</a></li>
+      <li><a href="{{ site.baseurl }}/fun.html">玩的开心</a></li>
+      <li><a href="{{ site.baseurl }}/tools.html">小工小具</a></li>
+      <li><a href="{{ site.baseurl }}/about.html">一叶知秋</a></li>
+      <li><a href="{{ site.baseurl }}/talk.html">你吐我槽</a></li>
+      <h5 class="li-github" align="center"><hr><a class="brand" href="{{ site.github }}" target="_blank" title="Mr.Liang's github."><i class="fa fa-github-square">Mr.Liang</i></a></h5>
+      <h5 class="li-see" align="center">
+	 &copy;{{ site.time | date: '%Y' }}
+	 <span id="busuanzi_container_site_uv"><i class="fa fa-user" title="本站访问人次"><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></i></span>
+   	 <span id="busuanzi_container_site_pv"><i class="fa fa-eye" title="本站访问总量"><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></i></span>
+      </h5>
+  </ul>
+</div>

@@ -1,0 +1,27 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  {% include header.html %}
+  {% include statistic.html %}
+  </head>
+  <body>
+    {% include scripts.html %}
+    <div id = "wrapper">
+      {%include navigation.html %}
+      <div class="container">
+        {{ content }}
+      </div>
+    </div>
+	{% include gotop.html %}
+    <script>
+		AOS.init({easing: 'ease-out-back',duration: 1000});
+		window.onload = function() {
+			baguetteBox.run('.baguetteBoxThree', {
+				animation: 'fadeIn',
+			});
+		};
+	</script> 
+  </body>
+</html>
