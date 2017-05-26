@@ -1,9 +1,8 @@
 name: 阿兵哥的博客
-author: liangren.com
-#baseurl: /liangren.com
+author: cjb
 keywords: java,github,git,jekyll,gollum,jquery,flash
 description: 一个小白码农的博客
-github: https://github.com/liangrengongzuoshi
+github: https://github.com/Carlcjb
 email: 710406514@qq.com
 
 
@@ -24,4 +23,3 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-
