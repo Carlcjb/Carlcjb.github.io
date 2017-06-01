@@ -1,33 +1,34 @@
 ---
-title: 阿兵哥的博客
+layout: default
 ---
-<div id="article" aos="zoom-in">
-	<h1 align="center"><span>时光</span>荏苒</h1>
-	<canvas id="time" width="200" height="200"></canvas>
-	<div class="time-h3"><h3 align="center">If the time goes back, what's your choice?</h3></div>
+
+<div class="main-post-list hidden">
+
+  <ol class="post-list">
+    {% for post in paginator.posts %}
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="{{ post.url }}" title="访问 {{ post.title }}">{{ post.title }}</a></h2>
+      <p class="excerpt">{{ post.content | strip_html | strip_newlines | truncate: 250 }}&hellip;</p>
+      <div class="post-list__meta">        
+        <time datetime="{{post.date | date: date_to_xmlschema}}" class="post-list__meta--date date">
+          <img src="/images/calendar.png" width="20px" /> 
+          {{ post.date | date: "%F"}}</time> 
+        <div class = "tag-img-icon">
+          <img src="/images/tag-icon.svg" width="20px" /> 
+        </div>
+        <a href="/tags">
+          <div class = "post-list-icon-mate">
+            <span class="post-list__meta--tags-right">{{ post.tags }}</span>
+          </div>
+          <div class = "post-list-small-mate">
+          <a class="btn-border-small" href={{ post.url }}>阅读全文 » </a>
+          </div>
+      </div>
+      <hr class="post-list__divider" />
+    </li>
+    {% endfor %}
+  </ol>
+
+  {% include pagination.html %}
+
 </div>
-
-<script src="{{ site.baseurl }}/js/time.js"></script>
-
-<!--<canvas id="welcome"></canvas>
-<script src="{{ site.baseurl }}/js/welcome.js"></script>-->
-
-<script type="text/javascript">
-    function browserRedirect() {
-        var sUserAgent = navigator.userAgent.toLowerCase();
-              
-        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-        var bIsAndroid = sUserAgent.match(/android/i) == "android";
-        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-        if (bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM){
-			alert("请登录PC端查看全部功能~");
-//          window.location.href="{{ site.baseurl }}/blog.html";
-        }
-    }
-    browserRedirect();
-</script>
