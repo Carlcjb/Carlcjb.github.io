@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Markdown工具集
-date: 2016-11-20 
+date: 2016-11-20
 tags: 工具    
 ---
 
@@ -32,7 +32,7 @@ H6 :###### Header 6
 引用 :> 引用内容               
 内嵌代码 : `alert('Hello World');`        
 画水平线 (HR) :--------          
-           
+
 
 css 的大部分语法同样可以在 markdown 上使用，但不同的渲染器渲染出来的 markdown 内容样式也不一样，下面这些链接里面有 markdown 基本语法，你也可以在下面几个平台上尝试着写一些。
 
@@ -76,5 +76,4 @@ css 的大部分语法同样可以在 markdown 上使用，但不同的渲染器
 
 <br>
 
-转载请注明：[潘柏信的博客](http://baixin) » [Markdown工具集](http://baixin.io/2016/11/markdownTool/)                   
-
+转载请注明：[阿兵哥的博客](https://carlcjb.github.io/) » [Markdown工具集](https://carlcjb.github.io/2016/11/markdownTool/)                   

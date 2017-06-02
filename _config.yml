@@ -1,42 +1,39 @@
 # Basic
 title: 阿兵哥
 subtitle: 个人站
-description: 欢迎来到我的个人站~
+description: 欢迎来到我的个人网站~
 # 头像里面的标题
-avatarTitle: leopardpan
+avatarTitle: Hello World
 # 头像里面的描述
-avatarDesc: iOS / 机器学习
+avatarDesc: 学无止境
 url: "https://carlcjb.github.io/"
 
 # Comment
 comment:
     # disqus: leopard
-    duoshuo: leopard 
+    duoshuo: leopard
 
 # Social
 social:
-    weibo: 5366874726 
-    github: leopardpan
-    # twitter: 
-    mail: leopardpan@icloud.com
+    weibo: 710406514
+    github: carlcjb
+    # twitter:
+    mail: carlcjb@icloud.com
 
-# 百度统计 
-# 使用博客模板请去掉或者更换 id 
+# 百度统计
+# 使用博客模板请去掉或者更换 id
 baidu:
-    id: 8ba1c6be0953b6f9c2ba38e57f615421  
+    id: 8ba1c6be0953b6f9c2ba38e57f615421
 
 # Google Analytics
 # 使用博客模板请去掉或者更换 id
 ga:
-    id: UA-84134159-3   
-    host: auto  
+    id: UA-84134159-3
+    host: auto
 
 
 # 《----------------- 上面的信息修改成你自己的 ---------------------------》
 #
-#
-#  _post/ 下的文章更换成你自己的文章
-#  帮忙star一下，感谢~😆 地址： https://github.com/leopardpan/leopardpan.github.io
 #
 #
 # 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
@@ -57,14 +54,12 @@ blog_button:
 
 # Navigation buttons in the front page.s
 nav:
-    - {title: 所有文章, description: archive, url: '/archive'}   
-    - {title: 标签, description: tags, url: '/tags'}      
-    - {title: 关于我, description: about, url: '/about'}      
-    
+    - {title: 所有文章, description: archive, url: '/archive'}
+    - {title: 标签, description: tags, url: '/tags'}
+    - {title: 关于我, description: about, url: '/about'}
+
 
 # Pagination
 gems: [jekyll-paginate]
 paginate: 20
 paginate_path: "page/:num/"
-
-
