@@ -1,12 +1,9 @@
 ---
 layout: post
 title: Jekyll搭建个人博客
-date: 2016-10-14
+date: 2017-6-3
 tags: 博客   
 ---
-
-　如果你看过我的文章会发现我现在的博客样式跟之前是有很大的区别的，之前我也是使用 HEXO 搭建的博客，后来发现使用 HEXO 在多台电脑上发布博客，操作起来并不是那么方便，果断就转到了 Jekyll 上，接下来我会讲如何使用 Jekyll 搭建博客，[博客模板效果](https://carlcjb.github.io/#blog)。
-
 
 ### 介绍
 
@@ -17,6 +14,11 @@ tags: 博客
 
 　　Jekyll 是一个免费的简单静态网页生成工具，可以配合第三方服务例如： Disqus（评论）、多说(评论) 以及分享 等等扩展功能，Jekyll 可以直接部署在 Github（国外） 或 Coding（国内） 上，可以绑定自己的域名。[Jekyll中文文档](http://jekyll.bootcss.com/)、[Jekyll英文文档](https://jekyllrb.com/)、[Jekyll主题列表](http://jekyllthemes.org/)。
 
+	安装ruby2
+	进入devkit目录运行 ruby dk.rb init 这时会生成config.yml 文件,编辑这个文件 加上- C:\Ruby200-x64  运行ruby dk.rb install
+	gem sources -r https://rubygems.org/ gem sources -r https://ruby.taobao.org/
+	gem sources -a http://gems.ruby-china.org
+	gem install bundler
 
 ### Jekyll 环境配置
 
